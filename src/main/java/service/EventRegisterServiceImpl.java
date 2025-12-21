@@ -17,9 +17,9 @@ public class EventRegisterServiceImpl implements EventRegisterService{
 		return eventRegister.viewEventWiseStudentRegistrations(eventName);
 	}
 	@Override
-	public List<EventModel> viewStudentWiseEventRegistrations(int studentId) {
+	public List<EventModel> viewStudentWiseEventRegistrations(int sid) {
 		// TODO Auto-generated method stub
-		return eventRegister.viewStudentWiseEventRegistrations(studentId);
+		return eventRegister.viewStudentWiseEventRegistrations(sid);
 //		List<EventModel> lst = eventRegister.viewStudentWiseEventRegistrations(studentNmae);
 
 		
@@ -29,11 +29,11 @@ public class EventRegisterServiceImpl implements EventRegisterService{
 		// TODO Auto-generated method stub
 		return eventRegister.getEventCapacityDetails(eventId);
 	}
-//	@Override
-//	public EventRegisterModel isUpdateStuddentEvent(EventRegisterModel model) {
-//		// TODO Auto-generated method stub
-//		return eventRegister.isUpdateStuddentEvent(model);
-//	}
+	@Override
+	public EventRegisterModel isUpdateStuddentEvent(EventRegisterModel model) {
+		// TODO Auto-generated method stub
+		return eventRegister.isUpdateStuddentEvent(model);
+	}
 	@Override
 	public boolean deleteRegistrationById(int rid) {
 		// TODO Auto-generated method stub

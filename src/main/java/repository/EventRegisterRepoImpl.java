@@ -40,12 +40,12 @@ public class EventRegisterRepoImpl extends DBInitialize implements EventRegister
 	}
 
 	@Override
-	public List<EventModel> viewStudentWiseEventRegistrations(int studentIdS) {
+	public List<EventModel> viewStudentWiseEventRegistrations(int sid) {
 		try {
 			eventList = new ArrayList<EventModel>();
 			
 			psmt=conn.prepareStatement("select e.eid , e.name , e.edate , e.venue , e.capacity from event e join registration r on e.eid = r.eid join student s on s.sid = r.sid where s.sid = ? ");
-			psmt.setInt(1, studentIdS);
+			psmt.setInt(1, sid);
 			
 			rs=psmt.executeQuery();
 			while(rs.next()) {

@@ -30,16 +30,29 @@ body {
 
 <body>
 
-	<!-- Navbar -->
-	<nav class="navbar navbar-dark bg-dark">
-		<div class="container">
-			<span class="navbar-brand">Event Operation Dashboard</span>
-			<marquee class="text-white"> Welcome Admin Into Event
-				Operation Section </marquee>
-			<a href="AdminDashboard.html" class="btn btn-outline-light btn-sm">Back
-				to Admin Page</a>
+	<nav class="navbar navbar-light bg-light px-3 border-bottom">
+		<div class="container-fluid d-flex align-items-center">
+
+			<!-- Left -->
+			<span class="navbar-brand  text-dark"> Event Operation
+				Dashboard </span>
+
+			<!-- Marque tag chya text la back to login chya btn pasun left kad move kar nya 
+		sathi me-5 kel mhanje margin dele -->
+
+			<div class="text-center flex-grow-1 me-5">
+				<marquee behavior="scroll" direction="left" scrollamount="4"
+					class="text-dark fw-semibold"> Welcome Admin Into Event
+					Operation Section </marquee>
+			</div>
+
+			<!-- Right -->
+			<a href="AdminDashboard.html" class="btn btn-outline-danger btn-sm"> Back
+				to Admin Page </a>
+
 		</div>
 	</nav>
+
 
 	<div class="container mt-4">
 
@@ -83,7 +96,7 @@ body {
 
 
 		<!-- List all events  -->
-		
+
 		<div id="allEvent" class="operation-section">
 			<h4>All Events</h4>
 
@@ -136,7 +149,8 @@ body {
 		<div id="upcomingEvent" class="operation-section">
 			<h4>Upcoming Events</h4>
 
-			<form action="<%=request.getContextPath()%>/UpcomingEventsServlet" method="get">
+			<form action="<%=request.getContextPath()%>/UpcomingEventsServlet"
+				method="get">
 
 
 

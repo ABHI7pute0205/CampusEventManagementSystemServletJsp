@@ -1,3 +1,7 @@
+<%@ page import="java.util.List"%>
+<%@ page import="Model.EventModel"%>
+<%@ page import="Model.StudentModel"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,97 +25,176 @@ body {
 </style>
 </head>
 <body>
-	<!-- Navbar -->
-	<nav class="navbar navbar-dark bg-dark">
-		<div class="container">
-			<span class="navbar-brand">Student Event Registration
-				Dashboard</span> <span><marquee style="color: #f8f9fa"
-					class="navbar-brand" behavior="scroll" direction="left">
-					Welcome Admin Into Student Event Registration Section </marquee></span> <a
-				href="AdminDashboard.html" class="btn btn-outline-light btn-sm">Back
-				to Admin Page</a>
+	<!--   this is new navbar  -->
+
+	<nav class="navbar navbar-light bg-light px-3 border-bottom">
+		<div class="container-fluid d-flex align-items-center">
+
+			<!-- Left -->
+			<span class="navbar-brand  text-dark"> Student Event
+				Registration Dashboard </span>
+
+			<!-- Marque tag chya text la back to login chya btn pasun left kad move kar nya 
+		sathi me-5 kel mhanje margin dele -->
+
+			<div class="text-center flex-grow-1 me-5">
+				<marquee behavior="scroll" direction="left" scrollamount="4"
+					class="text-dark fw-semibold"> Welcome Admin Into Student
+					Event Registration Section </marquee>
+			</div>
+
+			<!-- Right -->
+			<a href="AdminDashboard.html" class="btn btn-outline-danger btn-sm">Back
+				to Admin Page </a>
 		</div>
 	</nav>
 
 	<div class="container mt-4">
-		<!-- Operation Buttons -->
+
+		<!-- Buttons -->
 		<div class="text-center mb-4">
 			<button class="btn btn-primary m-2"
-				onclick="showSection('studentEvents')">Student Registered
-				Events</button>
+				onclick="showSection('studentEvents')">Student Wise Event
+				Registration</button>
+
 			<button class="btn btn-success m-2"
-				onclick="showSection('allStudents')">Students Registered
-				for Events</button>
+				onclick="showSection('allStudents')">Event Wise Student
+				Registration</button>
+
 			<button class="btn btn-info m-2"
-				onclick="showSection('eventDetails')">Event Details</button>
+				onclick="showSection('eventDetails')">Event Capacity
+				Details</button>
 		</div>
 
-		<!-- 1. EVENTS REGISTERED BY STUDENT -->
+		<!-- Student wise Event Registration -->
+
 		<div id="studentEvents" class="operation-section">
 			<h4>Events Registered by Student</h4>
-			<input type="number" class="form-control mb-3"
-				placeholder="Enter Student ID" />
 
-			<table class="table table-bordered">
-				<thead class="table-dark">
-					<tr>
-						<th>Event ID</th>
-						<th>Event Name</th>
-						<th>Date</th>
-						<th>Location</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>401</td>
-						<td>Tech Seminar</td>
-						<td>2025-02-10</td>
-						<td>Auditorium</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+			<form action="StudentWiseEventRegServlet" method="get">
+				<input type="number" name="sid" class="form-control mb-3"
+					placeholder="Enter Student ID" />
+				<button class="btn btn-primary">Get Details</button>
+			</form>
 
-		<!-- 2. STUDENTS REGISTERED FOR A SPECIFIC EVENT -->
-		<div id="allStudents" class="operation-section">
-			<h4>Students Registered for Event</h4>
+			<%
+			List<EventModel> studentEvents = (List<EventModel>) request.getAttribute("studRegForEvent");
 
-			<input type="number" class="form-control mb-3"
-				placeholder="Enter Event ID" />
+			if (studentEvents != null && !studentEvents.isEmpty()) {
+			%>
 
-			<table class="table table-bordered table-striped">
+			<table class="table table-bordered mt-3">
 				<thead class="table-success">
 					<tr>
-						<th>Student ID</th>
-						<th>Student Name</th>
-						<th>Department</th>
-						<th>Event Name</th>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Date</th>
+						<th>Venue</th>
+						<th>Capacity</th>
 					</tr>
 				</thead>
 				<tbody>
+					<%
+					for (EventModel e : studentEvents) {
+					%>
 					<tr>
-						<td>101</td>
-						<td>Rahul Patil</td>
-						<td>Computer</td>
-						<td>AI Workshop</td>
+						<td><%=e.getEid()%></td>
+						<td><%=e.getName()%></td>
+						<td><%=e.getEdate()%></td>
+						<td><%=e.getVenue()%></td>
+						<td><%=e.getCapacity()%></td>
 					</tr>
-					<tr>
-						<td>102</td>
-						<td>Amit Deshmukh</td>
-						<td>IT</td>
-						<td>AI Workshop</td>
-					</tr>
+					<%
+					}
+					%>
 				</tbody>
 			</table>
+
+			<%
+			} else if (request.getParameter("sid") != null) {
+			%>
+			<div class="text-danger text-center mt-3">No events registered
+				for this student</div>
+			<%
+			}
+			%>
 		</div>
 
-		<!-- 3. EVENT DETAILS -->
-		<div id="eventDetails" class="operation-section">
-			<h4>Event Details</h4>
-			<input type="number" class="form-control mb-3"
-				placeholder="Enter Event ID" />
+		<!-- Event Wise Student Registration -->
 
-			<table class="table table-bordered">
+
+		<div id="allStudents" class="operation-section">
+			<h4>Students Registered for Event Enter Event name to see</h4>
+
+			<form action="EventWieseStudentRegServlet" method="get">
+				<input type="text" name="eventName" class="form-control mb-3"
+					placeholder="Enter Event Name" />
+				<button class="btn btn-primary">Get Details</button>
+			</form>
+
+			<%
+			List<StudentModel> studentList = (List<StudentModel>) request.getAttribute("studEventReg");
+
+			if (studentList != null && !studentList.isEmpty()) {
+			%>
+
+			<table class="table table-bordered mt-3">
+				<thead class="table-success">
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Contact</th>
+						<th>Department</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+					for (StudentModel s : studentList) {
+					%>
+					<tr>
+						<td><%=s.getSid()%></td>
+						<td><%=s.getSname()%></td>
+						<td><%=s.getEmail()%></td>
+						<td><%=s.getContact()%></td>
+						<td><%=s.getDept()%></td>
+					</tr>
+					<%
+					}
+					%>
+				</tbody>
+			</table>
+
+			<%
+			} else if (request.getParameter("eventName") != null) {
+			%>
+			<div class="text-danger text-center mt-3">No students
+				registered for this event</div>
+			<%
+			}
+			%>
+		</div>
+
+
+		<!-- Event Details  -->
+
+		<div id="eventDetails" class="operation-section">
+			<h4>Event Details Enter Event id to see it's details</h4>
+
+			<form action="EventCapaciyDetailsServlet" method="get">
+				<input type="text" name="eid" class="form-control mb-3"
+					placeholder="Enter Event Id" />
+				<button class="btn btn-primary">Get Details</button>
+			</form>
+
+
+			<%
+			Model.EventModel event = (Model.EventModel) request.getAttribute("eventCapacity");
+
+			if (event != null) {
+			%>
+
+			<table class="table table-bordered mt-3">
 				<thead class="table-info">
 					<tr>
 						<th>Event Name</th>
@@ -122,25 +205,34 @@ body {
 				</thead>
 				<tbody>
 					<tr>
-						<td>AI Workshop</td>
-						<td>100</td>
-						<td>65</td>
-						<td>35</td>
+						<td><%=event.getName()%></td>
+						<td><%=event.getCapacity()%></td>
+						<td><%=event.getRegistered()%></td>
+						<td><%=event.getAvailable()%></td>
 					</tr>
 				</tbody>
 			</table>
+
+			<%
+			} else if (request.getParameter("eid") != null) {
+			%>
+
+			<div class="text-danger text-center mt-3">Event not found</div>
+
+			<%
+			}
+			%>
+
 		</div>
-	</div>
 
-	<!-- JS -->
-	<script>
-      function showSection(sectionId) {
-        document
-          .querySelectorAll(".operation-section")
-          .forEach((section) => (section.style.display = "none"));
+		<!-- JS -->
+		<script>
+	function showSection(sectionId) {
+		document.querySelectorAll(".operation-section")
+			.forEach(s => s.style.display = "none");
 
-        document.getElementById(sectionId).style.display = "block";
-      }
-    </script>
+		document.getElementById(sectionId).style.display = "block";
+	}
+	</script>
 </body>
 </html>
