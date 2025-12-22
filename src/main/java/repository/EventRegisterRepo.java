@@ -11,7 +11,7 @@ public interface EventRegisterRepo {
 	
 	public List<EventModel> viewStudentWiseEventRegistrations(int sid);
 	
-	public EventModel getEventCapacityDetails(int eventId);
+	public EventModel getEventCapacityDetails(int eid);
 	public EventRegisterModel isUpdateStuddentEvent(EventRegisterModel model);
 	public boolean deleteRegistrationById(int rid);
 }

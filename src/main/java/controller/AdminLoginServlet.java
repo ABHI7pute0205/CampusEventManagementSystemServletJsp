@@ -29,6 +29,7 @@ import helper.ServiceHelper;
 	        boolean isValid = ServiceHelper.adminService.validateAdminLogin(model);
 
 	        if (isValid) {
+	        	// session
 	            request.getRequestDispatcher("AdminDashboard.html")
 	                   .forward(request, response);
 	        } else {

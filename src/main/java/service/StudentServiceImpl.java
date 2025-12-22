@@ -29,14 +29,32 @@ public class StudentServiceImpl implements StudentService{
 		// TODO Auto-generated method stub
 		return studentRepo.isUpdateStudent(model);
 	}
+	
+	// me aata recently he method change kele
 	@Override
-	public List<StudentModel> isSearchStudentByDept(String dept) {
+	public List<StudentModel> isSearchStudentByDept(String dept , int limit , int offset) {
 		// TODO Auto-generated method stub
-		return studentRepo.isSearchStudentByDept(dept);
+		return studentRepo.isSearchStudentByDept(dept , limit , offset);
 	}
 	@Override
 	public List<StudentModel> isSearchStudentByEmail(String email) {
 		// TODO Auto-generated method stub
 		return studentRepo.isSearchStudentByEmail(email);
+	}
+	
+	// this method is to apply pagination and getTotalstudentCount to prevent to stop at last page
+	@Override
+	public List<StudentModel> viewStudentsWithPagination(int limit, int offset) {
+		// TODO Auto-generated method stub
+		return studentRepo.viewStudentsWithPagination(limit, offset);
+	}
+	@Override
+	public int getTotalStudentCount() {
+		// TODO Auto-generated method stub
+		return studentRepo.getTotalStudentCount();
+	}
+	@Override
+	public int getStudentCountByDept(String dept) {
+		return studentRepo.getStudentCountByDept(dept);
 	}
 }

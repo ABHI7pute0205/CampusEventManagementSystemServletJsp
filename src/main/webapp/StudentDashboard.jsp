@@ -48,7 +48,7 @@ if (view == null) {
 <body class="bg-light text-dark mt-3">
 
 	<!-- Nav bar start-->
-	
+
 	<nav class="navbar navbar-light bg-light px-3 border-bottom">
 		<div class="container-fluid d-flex align-items-center">
 
@@ -68,8 +68,8 @@ if (view == null) {
 			</div>
 
 			<!-- Right -->
-			<a href="login.html" class="btn btn-outline-danger btn-sm"> Back
-				to Login </a>
+			<a href="<%=request.getContextPath()%>/StudentLogoutServlet"
+				class="btn btn-outline-danger btn-sm"> Logout </a>
 
 		</div>
 	</nav>
@@ -87,7 +87,7 @@ if (view == null) {
 		%>
 
 		<!-- Buttons which are visible to User-->
-		
+
 		<div class="mb-4 text-center">
 			<a href="StudentDashboard.jsp?view=all" class="btn btn-primary me-2">
 				View All Events </a> <a href="StudentDashboard.jsp?view=upcoming"
@@ -96,8 +96,8 @@ if (view == null) {
 				View Registered Events </a>
 		</div>
 
-		
-		<!-- All Events S -->
+
+		<!-- View All Events  -->
 		<%
 		if ("all".equals(view)) {
 		%>
@@ -212,7 +212,7 @@ if (view == null) {
 		}
 		%>
 
-		
+
 		<!-- Register Events  -->
 		<%
 		if ("registered".equals(view)) {

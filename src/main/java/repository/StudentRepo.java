@@ -10,6 +10,13 @@ public interface StudentRepo {
 	public List<StudentModel> viewAllStudents();
 	public boolean isDeleteStudentById(int eid);
 	public StudentModel isUpdateStudent(StudentModel model);
-	public List<StudentModel> isSearchStudentByDept(String dept);
+	
+	public List<StudentModel> isSearchStudentByDept(String dept , int limit , int offset);
+	public int getStudentCountByDept(String dept);
 	public List<StudentModel> isSearchStudentByEmail(String email);
+	
+//	this is new method to apply pagination:
+	
+	public List<StudentModel> viewStudentsWithPagination(int limit, int offset);
+	public int getTotalStudentCount();
 }

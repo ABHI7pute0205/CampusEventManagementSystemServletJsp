@@ -24,6 +24,15 @@ body {
 .operation-section {
 	display: none;
 }
+
+#allStudent {
+	margin-left: 120px;
+}
+
+#deptSearch {
+	width: 1100px;
+	margin-left: 120px;
+}
 </style>
 </head>
 
@@ -60,16 +69,19 @@ body {
 		<div id="add" class="operation-section">
 			<div id="messageBox"></div>
 
-			<h4>Add Student</h4>
+			<h4>Enter Student Details</h4>
 
 			<form action="AddStudentServlet" method="post">
-				<input class="form-control mb-2" name="sname" placeholder="Name"
-					required /> <input class="form-control mb-2" name="email"
-					placeholder="Email" required /> <input class="form-control mb-2"
-					name="department" placeholder="Department" required /> <input
-					class="form-control mb-2" name="mobile" placeholder="Mobile"
-					required /> <input class="form-control mb-2" name="password"
-					type="password" placeholder="Password" required />
+				<input class="form-control mb-2" name="sname"
+					placeholder="Student Name" required /> <input
+					class="form-control mb-2" name="email" placeholder="Student email"
+					required /> <input class="form-control mb-2" name="department"
+					placeholder="Student Department" required /> <input
+					class="form-control mb-2" name="mobile"
+					placeholder="Student Mobile" required /> <input
+					class="form-control mb-2" name="password" type="password"
+					placeholder="Student Password" required />
+
 				<button class="btn btn-primary">Add Student</button>
 			</form>
 		</div>
@@ -129,17 +141,21 @@ body {
 		</div>
 	</div>
 
-	<!--  department -->
+	<!-- Search student by  department -->
+
 	<div id="dept" class="operation-section">
 
-		<h4>Students by Department</h4>
+		<h4 id="allStudent">Students by Department</h4>
 
 		<form action="<%=request.getContextPath()%>/SearchStudentByDept"
 			method="post">
 
-			<input type="text" name="department" class="form-control mb-3"
-				placeholder="Enter Department Name" required />
-			<button class="btn btn-warning">List Students</button>
+			<input id="deptSearch" type="text" name="department"
+				class="form-control mb-3" placeholder="Enter Department Name"
+				required />
+
+			<button id="allStudent" class="btn btn-warning">List
+				Students</button>
 		</form>
 
 		<%
@@ -183,18 +199,61 @@ body {
 		<%
 		}
 		%>
+		<!-- this is pagination button  -->
+		<%
+		Integer deptcurrentPage = (Integer) request.getAttribute("currentPage");
+		Integer depttotalPages = (Integer) request.getAttribute("totalPages");
+		String department = (String) request.getAttribute("department");
+		%>
+
+		<%
+		if (deptcurrentPage != null && depttotalPages != null) {
+		%>
+		<div class="mt-3 text-center">
+
+			<%
+			if (deptcurrentPage > 1) {
+			%>
+			<a class="btn btn-secondary"
+				href="SearchStudentByDept?department=<%=department%>&page=<%=deptcurrentPage - 1%>">
+				Previous </a>
+
+			<%
+			}
+			%>
+
+			<span class="mx-3"> Page <%=deptcurrentPage%> of <%=depttotalPages%>
+			</span>
+
+			<%
+			if (deptcurrentPage < depttotalPages) {
+			%>
+			<a class="btn btn-secondary"
+				href="SearchStudentByDept?department=<%=department%>&page=<%=deptcurrentPage + 1%>">
+				Next </a>
+			<%
+			}
+			%>
+
+		</div>
+		<%
+		}
+		%>
+
+		<!-- eith he search by department ch end zal  -->
 
 	</div>
 
 	<!--List all Student -->
 
 	<div id="all" class="operation-section">
-		<h4>All Students</h4>
+		<h4 id=allStudent>All Students</h4>
 
 		<form action="<%=request.getContextPath()%>/ListAllStudent"
 			method="get">
 
-			<button class="btn btn-info mb-3">Load All Students</button>
+			<button id="allStudent" class="btn btn-info mb-3">Load All
+				Students</button>
 		</form>
 
 		<%
@@ -233,6 +292,53 @@ body {
 		<%
 		}
 		%>
+
+
+		<!-- this is pagination button  -->
+		<%
+		// servlet madhun setAttribute ne currentPage che value servlet mdhun .jsp la pass kele 
+		// and .getAttribute ne te value get kele 
+		Integer allCurrentPage = (Integer) request.getAttribute("allcurrentPage");
+		Integer alltotalPages = (Integer) request.getAttribute("alltotalPages");
+		%>
+
+		<div class="mt-3 text-center">
+
+			<!-- href="ListAllStudent" jar user ne previous btn var ti click kel tar same servlet var ti redirect zal pahije tya sathi same servlet che URL href madhe pass kele  -->
+			<%
+			if (allCurrentPage != null && alltotalPages != null) {
+			%>
+			<div class="mt-3 text-center">
+
+				<%
+				if (allCurrentPage > 1) {
+				%>
+				<a class="btn btn-secondary"
+					href="ListAllStudent?page=<%=allCurrentPage - 1%>"> Previous </a>
+				<%
+				}
+				%>
+
+				<span class="mx-3"> Page <%=allCurrentPage%> of <%=alltotalPages%>
+				</span>
+
+				<%
+				if (allCurrentPage < alltotalPages) {
+				%>
+				<a class="btn btn-secondary"
+					href="ListAllStudent?page=<%=allCurrentPage + 1%>"> Next </a>
+				<%
+				}
+				%>
+
+			</div>
+			<%
+			}
+			%>
+
+		</div>
+
+
 	</div>
 
 	<script>
