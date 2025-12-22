@@ -5,14 +5,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 import Model.AdminLoginModel;
 import helper.ServiceHelper;
 
-/**
- * Servlet implementation class AdminLoginServlet
- */
 @WebServlet("/AdminLoginServlet")
  public class AdminLoginServlet extends HttpServlet {
 
@@ -29,9 +28,10 @@ import helper.ServiceHelper;
 	        boolean isValid = ServiceHelper.adminService.validateAdminLogin(model);
 
 	        if (isValid) {
-	        	// session
-	            request.getRequestDispatcher("AdminDashboard.html")
-	                   .forward(request, response);
+	            HttpSession session = request.getSession();
+	            session.setAttribute("adminUser", username);
+	            
+	            response.sendRedirect("AdminDashboard.jsp");
 	        } else {
 	            request.getRequestDispatcher("AdminLogin.html")
 	                   .forward(request, response);

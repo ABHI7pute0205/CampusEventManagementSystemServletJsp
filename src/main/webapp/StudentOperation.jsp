@@ -1,8 +1,19 @@
+
+<%
+HttpSession session1 = request.getSession(false);
+if (session1 == null || session1.getAttribute("adminUser") == null) {
+	response.sendRedirect("AdminLogin.html");
+	return;
+}
+%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%@ page import="java.util.List"%>
 <%@ page import="Model.StudentModel"%>
+
+
 
 
 <!DOCTYPE html>
@@ -43,7 +54,7 @@ body {
 			<span class="navbar-brand">Student Operation Dashboard</span> <span>
 				<marquee class="text-black"> Welcome Admin Into Student
 					Operation Section </marquee>
-			</span> <a href="AdminDashboard.html" class="btn btn-outline-dark btn-sm">
+			</span> <a href="AdminDashboard.jsp" class="btn btn-outline-dark btn-sm">
 				Back to Admin Page </a>
 		</div>
 	</nav>
@@ -62,6 +73,12 @@ body {
 
 			<button class="btn btn-info m-2" onclick="showSection('all')">
 				List All Students</button>
+
+<!--  pdf download  -->
+			<a href="StudentPdfServlet" class="btn btn-info m-2"> Download
+				Pdf </a>
+
+
 		</div>
 
 
@@ -270,6 +287,7 @@ body {
 					<th>Department</th>
 					<th>Contact</th>
 					<th>Password</th>
+					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -283,6 +301,12 @@ body {
 					<td><%=s.getDept()%></td>
 					<td><%=s.getContact()%></td>
 					<td><%=s.getPassword()%></td>
+
+					<td>
+						<!--  --> <a href="" class="btn btn-sm btn-success">Edit
+							Student</a> <a href="DeleteStudentServlet?studentId=<%=s.getSid()%>"
+						class="btn btn-sm btn-danger">Delete Student</a>
+					</td>
 				</tr>
 				<%
 				}
@@ -337,7 +361,6 @@ body {
 			%>
 
 		</div>
-
 
 	</div>
 

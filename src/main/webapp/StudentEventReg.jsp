@@ -1,3 +1,19 @@
+
+<!-- he je session aahe na each admin chya .jsp like studentEventReg.jsp | 
+studentOperation.jsp | EventOperationDashboard.jsp hya saglya file madhe top la session check
+ kara y ch nahi tar operation perform hotat logout var ti click tari again  -->
+ 
+ 
+<%
+    HttpSession session1 = request.getSession(false);
+    if (session1 == null || session1.getAttribute("adminUser") == null) {
+        response.sendRedirect("AdminLogin.html");
+        return;
+    }
+%>
+
+
+
 <%@ page import="java.util.List"%>
 <%@ page import="Model.EventModel"%>
 <%@ page import="Model.StudentModel"%>
@@ -44,7 +60,7 @@ body {
 			</div>
 
 			<!-- Right -->
-			<a href="AdminDashboard.html" class="btn btn-outline-danger btn-sm">Back
+			<a href="AdminDashboard.jsp" class="btn btn-outline-danger btn-sm">Back
 				to Admin Page </a>
 		</div>
 	</nav>
