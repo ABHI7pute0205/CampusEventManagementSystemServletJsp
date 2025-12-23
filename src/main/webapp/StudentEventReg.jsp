@@ -80,6 +80,11 @@ body {
 			<button class="btn btn-info m-2"
 				onclick="showSection('eventDetails')">Event Capacity
 				Details</button>
+				
+				<!--
+				<a href="RegisteredStudentPdfServlet" class="btn btn-info m-2"> Download
+				Registered Student Detail Pdf </a>  -->
+				
 		</div>
 
 		<!-- Student wise Event Registration -->

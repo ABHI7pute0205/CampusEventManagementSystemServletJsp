@@ -1,5 +1,6 @@
 package repository;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -222,6 +223,30 @@ public class StudentRepoImpl extends DBInitialize implements StudentRepo {
 	    }
 
 	    return count;
+	}
+
+	@Override
+	public StudentModel getStudentById(int sid) {
+
+		try {
+			psmt = conn.prepareStatement("select * from student where sid=?");
+			psmt.setInt(1, sid);
+
+			ResultSet rs = psmt.executeQuery();
+			if (rs.next()) {
+				StudentModel s = new StudentModel();
+				s.setSid(rs.getInt("sid"));
+				s.setSname(rs.getString("sname"));
+				s.setEmail(rs.getString("email"));
+				s.setContact(rs.getString("contact"));
+				s.setPassword(rs.getString("password"));
+				s.setDept(rs.getString("dept"));
+				return s;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
 	}
 
 }

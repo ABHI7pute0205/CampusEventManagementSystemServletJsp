@@ -74,9 +74,9 @@ body {
 			<button class="btn btn-info m-2" onclick="showSection('all')">
 				List All Students</button>
 
-<!--  pdf download  -->
+			<!--  pdf download  -->
 			<a href="StudentPdfServlet" class="btn btn-info m-2"> Download
-				Pdf </a>
+				Student Detail Pdf </a>
 
 
 		</div>
@@ -302,9 +302,12 @@ body {
 					<td><%=s.getContact()%></td>
 					<td><%=s.getPassword()%></td>
 
+<!--  -->
 					<td>
-						<!--  --> <a href="" class="btn btn-sm btn-success">Edit
-							Student</a> <a href="DeleteStudentServlet?studentId=<%=s.getSid()%>"
+						 <a href="EditStudentServlet?studentId=<%=s.getSid()%>"
+						class="btn btn-sm btn-success"> Edit Student </a> 
+						<a
+						href="DeleteStudentServlet?studentId=<%=s.getSid()%>"
 						class="btn btn-sm btn-danger">Delete Student</a>
 					</td>
 				</tr>

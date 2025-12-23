@@ -1,9 +1,10 @@
+
 <%
-    HttpSession session1 = request.getSession(false);
-    if (session1 == null || session1.getAttribute("adminUser") == null) {
-        response.sendRedirect("AdminLogin.html");
-        return;
-    }
+HttpSession session1 = request.getSession(false);
+if (session1 == null || session1.getAttribute("adminUser") == null) {
+	response.sendRedirect("AdminLogin.html");
+	return;
+}
 %>
 
 
@@ -57,8 +58,8 @@ body {
 			</div>
 
 			<!-- Right -->
-			<a href="AdminDashboard.jsp" class="btn btn-outline-danger btn-sm"> Back
-				to Admin Page </a>
+			<a href="AdminDashboard.jsp" class="btn btn-outline-danger btn-sm">
+				Back to Admin Page </a>
 
 		</div>
 	</nav>
@@ -77,6 +78,8 @@ body {
 			<button class="btn btn-secondary m-2"
 				onclick="showSection('upcomingEvent')">Upcoming Events</button>
 
+			<a href="EventPdfServlet" class="btn btn-info m-2"> Download
+				Event Detail Pdf </a>
 		</div>
 
 		<!-- Add Events -->

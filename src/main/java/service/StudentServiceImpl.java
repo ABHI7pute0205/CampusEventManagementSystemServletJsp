@@ -57,4 +57,9 @@ public class StudentServiceImpl implements StudentService{
 	public int getStudentCountByDept(String dept) {
 		return studentRepo.getStudentCountByDept(dept);
 	}
+	@Override
+	public StudentModel getStudentById(int sid) {
+		// TODO Auto-generated method stub
+		return studentRepo.getStudentById(sid);
+	}
 }

@@ -19,4 +19,6 @@ public interface StudentRepo {
 	
 	public List<StudentModel> viewStudentsWithPagination(int limit, int offset);
 	public int getTotalStudentCount();
+	
+	public StudentModel getStudentById(int sid);
 }
